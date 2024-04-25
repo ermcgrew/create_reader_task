@@ -1,0 +1,50 @@
+
+{
+  "name": "create_guided_reader_task",
+  "label": "create guided reader task",
+  "description": "Create and assign a guided reader task.",
+  "version": "0.1.0",
+  "author": "Emily McGrew",
+  "maintainer": "Emily McGrew <emily.mcgrew@pennmedicine.upenn.edu>",
+  "cite": "",
+  "license": "Apache-2.0",
+  "url": "",
+  "source": "",
+  "environment": {
+    "FLYWHEEL": "/flywheel/v0"
+  },
+  "custom": {
+    "gear-builder": {
+      "category": "utility",
+      "image": "emilymcgrew/create_reader_task:0.1.0"
+    },
+    "flywheel": {
+      "suite": "QA"
+    }
+  },
+  "config": {
+    "task_type": {
+      "description": "Which QC task to assign",
+      "type": "string",
+      "default": "T1",
+      "enum": [
+        "T1",
+        "T2",
+        "FLAIR",
+        "ASHS_T1",
+        "ASHS_ICV"
+      ]
+    },
+    "assignee": {
+      "description": "Who to assign task to",
+      "type":"string"
+    },
+    "due_date":{
+      "description": "Date to complete task by. If not set, defaults to one week from current time",
+      "type": "string",
+      "optional": "true"
+    }
+
+  },
+  "command": "python run.py"
+}
