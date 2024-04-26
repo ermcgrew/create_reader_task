@@ -10,5 +10,7 @@ ENV FLYWHEEL=/flywheel/v0
 
 RUN mkdir -p ${FLYWHEEL}
 COPY run.py ${FLYWHEEL}/run.py 
+COPY log_in.py ${FLYWHEEL}/log_in.py 
+COPY call_postman.sh ${FLYWHEEL}/call_postman.sh
 
 ENTRYPOINT ["python run.py"]
