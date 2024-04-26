@@ -39,7 +39,7 @@
     },
     "assignee": {
       "description": "Assign this task to someone using <flyhweel_username>@upenn.edu",
-      "default":"emilymcgrew@upenn.edu",
+      "default":"emcgrew@upenn.edu",
       "type":"string"
     },
     "due_date":{

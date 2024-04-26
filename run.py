@@ -1,18 +1,17 @@
 #!/usr/bin/env python
 from datetime import datetime,timedelta
 import flywheel
+import json
 import logging  
 import subprocess
 from log_in import api_key
 
 
 ## dictionary of {task_type:[postman protocol ID,tag to use for files that need this task]}
-task_type_id_map = {"T1":["6478f22a6530585f6ee1284f","ReadyforImageQC"], 
-                    "T2":["","ReadyforImageQC"], 
-                    "FLAIR": ["","ReadyforImageQC"], 
-                    "ASHS_T1":[], 
-                    "ASHS_ICV":[]}
-## TODO:protocols for T2, FLAIR, ASHS
+task_type_id_map = {"T1": ["6478f22a6530585f6ee1284f","ReadyforImageQC"], 
+                    "T2": ["6478f309f577c9ed0ad7816d","ReadyforImageQC"], 
+                    "FLAIR": ["6478f1c6f577c9ed0ad7816c","ReadyforImageQC"]
+                    }
 ## TODO:double-check T1 viewer config id in postman, not showing up
 
 def validate_user(assignee):
@@ -48,18 +47,16 @@ def main(context):
     protocol_id=task_type_id_map[task_type][0]
     include_tag=task_type_id_map[task_type][1]
 
-    log.info(f"Calling postman to assign task with arguments: {assign_to},{due_date_formatted},{include_tag},{protocol_id}")
-    # result=subprocess.run(["./call_postman.sh", assign_to,due_date_formatted,include_tag,protocol_id],\
-    #                     capture_output=True,text=True)
-    # log.info(result)
-    # log.info(result.stdout)
-    ###TODO: How to parse result for useful logging
-    # result_list = result.stdout.split("\n")
-    # print(result_list)
-    # print(result_list[-1])
-    ## it's string that contains a list which is made up of dictionaries
-    ## ideally want the "task_id" key from each dictionary 
-    ## and a length of list for how many tasks created
+    log.info(f"Calling postman to assign task with arguments: {assign_to}, {due_date_formatted}, {include_tag}, {protocol_id}")
+    result=subprocess.run(["./call_postman.sh", assign_to,due_date_formatted,include_tag,protocol_id],\
+                        capture_output=True,text=True)
+    result_dict = json.loads(result.stdout)
+    try:
+        all_task_ids = [result_dict[i]['task_id'] for i in range(0,len(result_dict)) ]
+        log.info(f"{len(result_dict)} tasks assigned, task ids: {all_task_ids}")
+    except KeyError as e:
+        log.warning(f'Error {e}: {json.loads(result.stderr)}')
+
 
 if __name__ == "__main__": 
    # Initialize logging and set its level  
