@@ -1,5 +1,6 @@
 FROM --platform=linux/amd64 alpine:latest
 RUN apk add --no-cache bash \  
+    curl \
     python3 \
     py-pip \
  && pip install flywheel-gear-toolkit flywheel-sdk --break-system-packages \  

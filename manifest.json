@@ -1,6 +1,6 @@
 
 {
-  "name": "create_guided_reader_task",
+  "name": "create-guided-reader-task",
   "label": "create guided reader task",
   "description": "Create and assign a guided reader task.",
   "version": "0.1.0",
@@ -9,7 +9,7 @@
   "cite": "",
   "license": "Apache-2.0",
   "url": "",
-  "source": "",
+  "source": "https://github.com/ermcgrew/create_reader_task",
   "environment": {
     "FLYWHEEL": "/flywheel/v0"
   },
@@ -22,9 +22,11 @@
       "suite": "QA"
     }
   },
+  "inputs": {
+  },
   "config": {
     "task_type": {
-      "description": "Which QC task to assign",
+      "description": "Which QC task to assign.",
       "type": "string",
       "default": "T1",
       "enum": [
@@ -36,15 +38,15 @@
       ]
     },
     "assignee": {
-      "description": "Who to assign task to",
+      "description": "Assign this task to someone using <flyhweel_username>@upenn.edu",
+      "default":"emilymcgrew@upenn.edu",
       "type":"string"
     },
     "due_date":{
-      "description": "Date to complete task by. If not set, defaults to one week from current time",
+      "description": "Date to complete task by. Format YYYY-MM-DD. If no date provided, will be set to one week from now.",
       "type": "string",
-      "optional": "true"
+      "default":""
     }
-
   },
   "command": "python run.py"
 }

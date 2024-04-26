@@ -5,11 +5,11 @@ due_date=$2
 include_tag=$3
 protocol_id=$4
 
+# echo In bash script to execute curl call to postman
 # echo Assign task to "${assign_to}"
 # echo Due date is "${due_date}"
 # echo all files with tag "${include_tag}"
 # echo protocol "${protocol_id}"
-echo In bash script to execute curl call to postman
 
 function get_data() {
   cat <<EOF
