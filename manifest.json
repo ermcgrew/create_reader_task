@@ -3,7 +3,7 @@
   "name": "create-guided-reader-task",
   "label": "create guided reader task",
   "description": "Create and assign a guided reader task.",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "author": "Emily McGrew",
   "maintainer": "Emily McGrew <emily.mcgrew@pennmedicine.upenn.edu>",
   "cite": "",
@@ -16,7 +16,7 @@
   "custom": {
     "gear-builder": {
       "category": "utility",
-      "image": "emilymcgrew/create_reader_task:0.1.3"
+      "image": "emilymcgrew/create_reader_task:0.1.4"
     },
     "flywheel": {
       "suite": "QA"

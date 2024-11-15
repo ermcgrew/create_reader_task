@@ -28,7 +28,8 @@ function get_data() {
     },
     "task_type": "R",
     "protocol_id": "${protocol_id}",
-    "due_date": "${due_date}"
+    "due_date": "${due_date}",
+    "allow_duplicates": "False"
 }
 EOF
 }
