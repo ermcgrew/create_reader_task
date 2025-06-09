@@ -8,11 +8,10 @@ from log_in import api_key
 
 
 ## dictionary of {task_type:[postman protocol ID,tag to use for files that need this task]}
-task_type_id_map = {"T1": ["6478f22a6530585f6ee1284f","ReadyforImageQC"], 
+task_type_id_map = {"T1": ["6478f22a6530585f6ee1284f","PreferredT1"], 
                     "T2": ["6478f309f577c9ed0ad7816d","ReadyforImageQC"], 
                     "FLAIR": ["6478f1c6f577c9ed0ad7816c","ReadyforImageQC"]
                     }
-## TODO:double-check T1 viewer config id in postman, not showing up
 
 def validate_user(assignee):
     fw = flywheel.Client(f"upenn.flywheel.io:{api_key}")

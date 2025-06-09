@@ -37,6 +37,7 @@ EOF
 
 ## load api key from log_in.py 
 function get_api_key() {
+  # shellcheck source=/Users/emilymcgrew/Library/CloudStorage/Box-Box/scripts/flywheel/create_reader_task/log_in.py
   source ./log_in.py
   cat <<EOF 
 Authorization: scitran-user upenn.flywheel.io:$api_key
