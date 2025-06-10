@@ -13,4 +13,4 @@ COPY run.py ${FLYWHEEL}/run.py
 COPY log_in.py ${FLYWHEEL}/log_in.py 
 COPY call_postman.sh ${FLYWHEEL}/call_postman.sh
 
-ENTRYPOINT ["python run.py"]
+ENTRYPOINT ["python3", "/flywheel/v0/run.py"]

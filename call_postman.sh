@@ -5,12 +5,6 @@ due_date=$2
 include_tag=$3
 protocol_id=$4
 
-# echo In bash script to execute curl call to postman
-# echo Assign task to "${assign_to}"
-# echo Due date is "${due_date}"
-# echo all files with tag "${include_tag}"
-# echo protocol "${protocol_id}"
-
 function get_data() {
   cat <<EOF
   {
@@ -37,7 +31,6 @@ EOF
 
 ## load api key from log_in.py 
 function get_api_key() {
-  # shellcheck source=/Users/emilymcgrew/Library/CloudStorage/Box-Box/scripts/flywheel/create_reader_task/log_in.py
   source ./log_in.py
   cat <<EOF 
 Authorization: scitran-user upenn.flywheel.io:$api_key

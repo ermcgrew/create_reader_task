@@ -1,11 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+
 from datetime import datetime,timedelta
 import flywheel
 import json
 import logging  
 import subprocess
 from log_in import api_key
-
 
 ## dictionary of {task_type:[postman protocol ID,tag to use for files that need this task]}
 task_type_id_map = {"T1": ["6478f22a6530585f6ee1284f","PreferredT1"], 
@@ -53,8 +53,8 @@ def main(context):
     try:
         all_task_ids = [result_dict[i]['task_id'] for i in range(0,len(result_dict)) ]
         log.info(f"{len(result_dict)} tasks assigned, task ids: {all_task_ids}")
-    except KeyError as e:
-        log.warning(f'Error {e}: {json.loads(result.stderr)}')
+    except: 
+        log.warning(f'Error in call to create tasks. \nStdout is:\n{result_dict}\n Stderror is:\n{result.stderr}')
 
 
 if __name__ == "__main__": 
