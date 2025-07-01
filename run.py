@@ -26,6 +26,15 @@ def validate_user(assignee):
     else:
         return True
     
+def validate_tags(tag_to_check):
+    fw = flywheel.Client(f"upenn.flywheel.io:{api_key}")
+    group = fw.get_group('dwolklab')
+    wolktags=group.tags
+
+    if tag_to_check in wolktags:
+        return True
+    else:
+        return False
 
 def main(context):
     config = context.config # from the gear context, get the config settings
@@ -46,8 +55,14 @@ def main(context):
     protocol_id=task_type_id_map[task_type]
 
     include_tag=config['include_tags']
+    if not validate_tags(include_tag):
+        log.warning(f"Include tag '{include_tag}' not found in project. Use an existing tag.")
+        raise ValueError(f"Include tag '{include_tag}' not found in project. Use an existing tag.")
 
     exclude_tag=config['exclude_tags']
+    if not validate_tags(exclude_tag):
+        log.warning(f"Include tag '{exclude_tag}' not found in project. Use an existing tag.")
+        raise ValueError(f"Include tag '{exclude_tag}' not found in project. Use an existing tag.")
 
     log.info(f"Calling postman to assign task with arguments: {assign_to}, {due_date_formatted}, {include_tag}, {exclude_tag}, {protocol_id}")
     result=subprocess.run(["./call_postman.sh", assign_to,due_date_formatted,include_tag,exclude_tag,protocol_id],\
