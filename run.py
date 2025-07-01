@@ -7,10 +7,10 @@ import logging
 import subprocess
 from log_in import api_key
 
-## dictionary of {task_type:[postman protocol ID,tag to use for files that need this task]}
-task_type_id_map = {"T1": ["6478f22a6530585f6ee1284f","PreferredT1"], 
-                    "T2": ["6478f309f577c9ed0ad7816d","ReadyforImageQC"], 
-                    "FLAIR": ["6478f1c6f577c9ed0ad7816c","ReadyforImageQC"]
+## {task_type from manifest:postman protocol ID}
+task_type_id_map = {"T1_image": "6478f22a6530585f6ee1284f", 
+                    "T2_image": "6478f309f577c9ed0ad7816d", 
+                    "FLAIR_image": "6478f1c6f577c9ed0ad7816c"
                     }
 
 def validate_user(assignee):
@@ -43,11 +43,14 @@ def main(context):
         due_date_formatted = due_date_dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
 
     task_type=config['task_type']
-    protocol_id=task_type_id_map[task_type][0]
-    include_tag=task_type_id_map[task_type][1]
+    protocol_id=task_type_id_map[task_type]
 
-    log.info(f"Calling postman to assign task with arguments: {assign_to}, {due_date_formatted}, {include_tag}, {protocol_id}")
-    result=subprocess.run(["./call_postman.sh", assign_to,due_date_formatted,include_tag,protocol_id],\
+    include_tag=config['include_tags']
+
+    exclude_tag=config['exclude_tags']
+
+    log.info(f"Calling postman to assign task with arguments: {assign_to}, {due_date_formatted}, {include_tag}, {exclude_tag}, {protocol_id}")
+    result=subprocess.run(["./call_postman.sh", assign_to,due_date_formatted,include_tag,exclude_tag,protocol_id],\
                         capture_output=True,text=True)
     result_dict = json.loads(result.stdout)
     try:

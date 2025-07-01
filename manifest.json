@@ -2,7 +2,7 @@
   "name": "create-guided-reader-task",
   "label": "create guided reader task",
   "description": "Create and assign a guided reader task.",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "author": "Emily McGrew",
   "maintainer": "Emily McGrew <emily.mcgrew@pennmedicine.upenn.edu>",
   "cite": "",
@@ -18,7 +18,7 @@
   "custom": {
     "gear-builder": {
       "category": "utility",
-      "image": "emilymcgrew/create_reader_task:0.1.8"
+      "image": "emilymcgrew/create_reader_task:0.1.10"
     },
     "flywheel": {
       "suite": "QA"
@@ -29,14 +29,22 @@
     "task_type": {
       "description": "Which QC task to assign.",
       "type": "string",
-      "default": "T1",
+      "default": "T1_image",
       "enum": [
-        "T1",
-        "T2",
-        "FLAIR",
-        "ASHS_T1",
-        "ASHS_ICV"
+        "T1_image",
+        "T2_image",
+        "FLAIR_image",
+        "T1_ASHS",
+        "T1_ICV"
       ]
+    },
+    "include_tags": {
+      "description": "Tags to include in file search",
+      "type": "string"
+    },
+    "exclude_tags": {
+      "description": "Tags to exclude in file search",
+      "type": "string"
     },
     "assignee": {
       "description": "Assign this task to someone using <flyhweel_username>@upenn.edu",

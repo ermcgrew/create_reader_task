@@ -3,7 +3,8 @@
 assign_to=$1
 due_date=$2
 include_tag=$3
-protocol_id=$4
+exclude_tag=$4
+protocol_id=$5
 
 function get_data() {
   cat <<EOF
@@ -13,7 +14,7 @@ function get_data() {
     "project_id": "5c508d5fc2a4ad002d7628d8",
     "parent_tag_filter": {
       "include": ["${include_tag}"],
-      "exclude": []
+      "exclude": ["${exclude_tag}"]
     },
     "viewer": "OHIF",
     "status": "Todo",
