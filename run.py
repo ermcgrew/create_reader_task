@@ -58,12 +58,14 @@ def main(context):
 
 
 if __name__ == "__main__": 
-   # Initialize logging and set its level  
+    # Get the gear context
+    context = flywheel.GearContext() 
+
+    # Initialize logging and set its level    
+    context.init_logging() 
     logging.basicConfig()  
     log = logging.getLogger()  
     log.setLevel(logging.INFO)
-
-    context = flywheel.GearContext() # Get the gear context  
 
     main(context)
 

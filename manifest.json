@@ -1,9 +1,8 @@
-
 {
   "name": "create-guided-reader-task",
   "label": "create guided reader task",
   "description": "Create and assign a guided reader task.",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "author": "Emily McGrew",
   "maintainer": "Emily McGrew <emily.mcgrew@pennmedicine.upenn.edu>",
   "cite": "",
@@ -11,19 +10,21 @@
   "url": "",
   "source": "https://github.com/ermcgrew/create_reader_task",
   "environment": {
-    "FLYWHEEL": "/flywheel/v0"
+    "FLYWHEEL": "/flywheel/v0",
+    "SHLVL": "1",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "PWD": "/flywheel/v0"
   },
   "custom": {
     "gear-builder": {
       "category": "utility",
-      "image": "emilymcgrew/create_reader_task:0.1.7"
+      "image": "emilymcgrew/create_reader_task:0.1.8"
     },
     "flywheel": {
       "suite": "QA"
     }
   },
-  "inputs": {
-  },
+  "inputs": {},
   "config": {
     "task_type": {
       "description": "Which QC task to assign.",
@@ -39,13 +40,13 @@
     },
     "assignee": {
       "description": "Assign this task to someone using <flyhweel_username>@upenn.edu",
-      "default":"emcgrew@upenn.edu",
-      "type":"string"
+      "default": "emcgrew@upenn.edu",
+      "type": "string"
     },
-    "due_date":{
+    "due_date": {
       "description": "Date to complete task by. Format YYYY-MM-DD. If no date provided, will be set to one week from now.",
       "type": "string",
-      "default":""
+      "default": ""
     }
   },
   "command": "python run.py"
