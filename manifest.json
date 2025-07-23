@@ -2,7 +2,7 @@
   "name": "create-guided-reader-task",
   "label": "create guided reader task",
   "description": "Create and assign a guided reader task.",
-  "version": "0.1.11",
+  "version": "0.1.13",
   "author": "Emily McGrew",
   "maintainer": "Emily McGrew <emily.mcgrew@pennmedicine.upenn.edu>",
   "cite": "",
@@ -18,7 +18,7 @@
   "custom": {
     "gear-builder": {
       "category": "utility",
-      "image": "emilymcgrew/create_reader_task:0.1.11"
+      "image": "emilymcgrew/create_reader_task:0.1.13"
     },
     "flywheel": {
       "suite": "QA"
@@ -35,7 +35,8 @@
         "T2_image",
         "FLAIR_image",
         "T1_ASHS",
-        "T1_ICV"
+        "T1_ICV",
+        "Incidential_findings"
       ]
     },
     "include_tags": {
@@ -44,7 +45,8 @@
     },
     "exclude_tags": {
       "description": "Tags to exclude in file search",
-      "type": "string"
+      "type": "string",
+      "optional": true
     },
     "assignee": {
       "description": "Assign this task to someone using <flyhweel_username>@upenn.edu",
@@ -55,6 +57,16 @@
       "description": "Date to complete task by. Format YYYY-MM-DD. If no date provided, will be set to one week from now.",
       "type": "string",
       "default": ""
+    },
+    "container_level": {
+      "description": "Container level to use for task.",
+      "type": "string",
+      "default": "file",
+      "enum": [
+        "session",
+        "acquisition",
+        "file"
+      ]
     }
   },
   "command": "python run.py"

@@ -5,12 +5,13 @@ due_date=$2
 include_tag=$3
 exclude_tag=$4
 protocol_id=$5
+container_level=$6
 
 function get_data() {
   cat <<EOF
   {
     "assignees": ["${assign_to}"],
-    "parent_type": "file",
+    "parent_type": "${container_level}",
     "project_id": "5c508d5fc2a4ad002d7628d8",
     "parent_tag_filter": {
       "include": ["${include_tag}"],

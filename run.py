@@ -10,7 +10,8 @@ from log_in import api_key
 ## {task_type from manifest:postman protocol ID}
 task_type_id_map = {"T1_image": "6478f22a6530585f6ee1284f", 
                     "T2_image": "6478f309f577c9ed0ad7816d", 
-                    "FLAIR_image": "6478f1c6f577c9ed0ad7816c"
+                    "FLAIR_image": "6478f1c6f577c9ed0ad7816c", 
+                    "Incidential_findings": "646247ac82bb22a03319349a"
                     }
 
 def validate_user(assignee):
@@ -58,14 +59,21 @@ def main(context):
     if not validate_tags(include_tag):
         log.warning(f"Include tag '{include_tag}' not found in project. Use an existing tag.")
         raise ValueError(f"Include tag '{include_tag}' not found in project. Use an existing tag.")
+    
+    try:
+        exclude_tag=config['exclude_tags']
+        if not validate_tags(exclude_tag):
+            log.warning(f"Include tag '{exclude_tag}' not found in project. Use an existing tag.")
+            raise ValueError(f"Include tag '{exclude_tag}' not found in project. Use an existing tag.")
+    except KeyError:
+        log.debug(f"No exlude tag added to command by user.")
+        exclude_tag=""
+        
+    container_level = config["container_level"]
 
-    exclude_tag=config['exclude_tags']
-    if not validate_tags(exclude_tag):
-        log.warning(f"Include tag '{exclude_tag}' not found in project. Use an existing tag.")
-        raise ValueError(f"Include tag '{exclude_tag}' not found in project. Use an existing tag.")
 
     log.info(f"Calling postman to assign task with arguments: {assign_to}, {due_date_formatted}, {include_tag}, {exclude_tag}, {protocol_id}")
-    result=subprocess.run(["./call_postman.sh", assign_to,due_date_formatted,include_tag,exclude_tag,protocol_id],\
+    result=subprocess.run(["./call_postman.sh", assign_to,due_date_formatted,include_tag,exclude_tag,protocol_id,container_level],\
                         capture_output=True,text=True)
     result_dict = json.loads(result.stdout)
     try:
